@@ -6,7 +6,7 @@
 
 all: configure man
 
-BTDIR := ../../../quattor-build-tools
+BTDIR := ../../quattor-build-tools
 
 _btincl := $(shell ls $(BTDIR)/quattor-buildtools.mk 2>/dev/null || \
              echo quattor-buildtools.mk)
