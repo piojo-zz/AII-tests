@@ -481,7 +481,7 @@ EOF
     # partitioning.
     ksuserhooks ($config, PREHOOK);
 
-    ksprint_filesystems ($config);
+    $self->ksprint_filesystems ($config);
     # Is this needed if we are allowing for hooks?
     ksuserscript ($config, PRESCRIPT);
 
@@ -498,7 +498,7 @@ EOF
 # devices and filesystems
 sub ksprint_filesystems
 {
-    my $config = shift;
+    my ($self, $config) = @_;
 
     # Skip the remainder if "/system/filesystems" is not defined
     return unless ( $config->elementExists (FS) );
@@ -514,7 +514,7 @@ sub ksprint_filesystems
     }
 	
     foreach (@$clear) {
-	my $disk = build ($config, "physical_devs/$_");
+	my $disk = build ($config, "physical_devs/".$self->escape($_));
 	$disk->clearpart_ks;
     }
     while ($fss->hasNextElement) {

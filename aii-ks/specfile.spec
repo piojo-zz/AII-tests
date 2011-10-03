@@ -9,7 +9,7 @@ Summary: @DESCRIPTION@
 Name: @NAME@
 Version: @VERSION@
 Vendor: EDG/CERN
-Release: 1
+Release: @RELEASE@
 License: http://cern.ch/eu-datagrid/license.html
 Group: quattor/Components
 Source: @TARFILE@
