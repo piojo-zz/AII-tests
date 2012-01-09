@@ -1,0 +1,73 @@
+################################################################################
+# This is '@SELF@', a @NAME@'s file
+################################################################################
+#
+# VERSION:    @VERSION@, @DATE@
+# AUTHOR:     @AUTHOR@
+# MAINTAINER: @MAINTAINER@
+# LICENSE:    @LICENSE@
+#
+################################################################################
+# Coding style: emulate <TAB> characters with 4 spaces, thanks!
+################################################################################
+#
+# This file is the standard @COMP@ configuration. It only performs some
+# validations, combines information that is already available, and 
+# set sensible default values.
+#
+# This file should NOT contain any site or platform customization.
+#
+################################################################################
+
+unique template quattor/@COMP@/config;
+
+include { 'quattor/functions/network' };
+include { 'quattor/functions/filesystem' };
+include { 'quattor/@COMP@/schema' };
+
+
+# For convenience
+variable AII_DOMAIN ?= value('/system/network/domainname');
+variable AII_HOSTNAME ?= value('/system/network/hostname');
+
+variable AII_OSINSTALL_GEN ?= "quattor/@COMP@/ks/config";
+variable AII_NBP_GEN ?= "quattor/@COMP@/pxelinux/config";
+
+# Including the KS generator or equivalent
+include { AII_OSINSTALL_GEN};
+# Including the PXE generator or equivalent
+include { AII_NBP_GEN };
+
+
+
+#################################################
+# DHCP daemon configuration (legacy from @COMP@ v1)
+#################################################
+
+#
+# TFTP server
+# This is optional. Only it is necessary if your TFTP server is running on
+# a different machine than the DHCP server
+#
+# "/system/@COMP@/dhcp/options/tftpserver" = "tftp.mydomain.org"
+#
+variable AII_DHCP_TFTPSERVER ?= null;
+"/system/@COMP@/dhcp/options/addoptions" ?= AII_DHCP_TFTPSERVER;
+
+#
+# Additional DHCP options (optional).
+# Warning: They will be added in the host declaration of dhcpd.conf file, so 
+# do not forget the ';' at the end
+#
+#"/system/@COMP@/dhcp/addoptions" = "options blu-blo-bli bla;";
+#
+variable AII_DHCP_ADDOPTIONS ?= null;
+"/system/@COMP@/dhcp/options/addoptions" ?= AII_DHCP_ADDOPTIONS;
+
+
+###################################
+# End of DHCP daemon configuration
+###################################
+
+
+

@@ -1,0 +1,19 @@
+################################################################################
+# This is 'TPL/config.tpl', a aii-ks's file
+################################################################################
+#
+# VERSION:    @VERSION@, @DATE@
+# AUTHOR:     @AUTHOR@
+# MAINTAINER: @MAINTAINER@
+# LICENSE:    @LICENSE@
+#
+################################################################################
+# Coding style: emulate <TAB> characters with 4 spaces, thanks!
+################################################################################
+
+# Template adding aii-@COMP@ rpm to the configuration
+
+unique template quattor/aii/@COMP@/rpms;
+
+"/software/packages"=pkg_repl("aii-@COMP@","@VERSION@-@RELEASE@","noarch");
+

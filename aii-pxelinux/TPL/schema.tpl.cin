@@ -1,0 +1,25 @@
+################################################################################
+# This is '@SELF@', a @NAME@s file
+################################################################################
+#
+# VERSION:    @VERSION@, @DATE@
+# AUTHOR:     @AUTHOR@
+# MAINTAINER: @MAINTAINER@
+# LICENSE:    @LICENSE@
+#
+################################################################################
+# Coding style: emulate <TAB> characters with 4 spaces, thanks!
+################################################################################
+unique template quattor/aii/@COMP@/schema;
+
+# PXE configuration.
+type structure_@COMP@_pxe_info = {
+	"initrd"	: string
+	"kernel"	: string
+	"ksdevice"	: string with  match (SELF, ("^(eth[0-9]+|link|fd)$")) || is_hwaddr (SELF)
+	"kslocation"	: type_absoluteURI
+	"label"		: string
+	"append"	? string
+};
+
+bind "/system/aii/nbp/@COMP@" = structure_@COMP@_pxe_info;

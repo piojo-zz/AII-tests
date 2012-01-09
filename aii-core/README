@@ -1,0 +1,6 @@
+AII Automated Installation Infrastructure
+-----------------------------------------
+Kickstart and PXE are not configured anymore by NCM
+templates. Instead, components are used, and shipped
+separately. Officially supported components are aii-ks and
+aii-pxelinux.

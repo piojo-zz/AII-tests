@@ -1,0 +1,19 @@
+################################################################################
+# This is 'TPL/config.tpl', a aii-ks's file
+################################################################################
+#
+# VERSION:    @VERSION@, @DATE@
+# AUTHOR:     @AUTHOR@
+# MAINTAINER: @MAINTAINER@
+# LICENSE:    @LICENSE@
+#
+################################################################################
+# Coding style: emulate <TAB> characters with 4 spaces, thanks!
+################################################################################
+
+# Template adding aii-client rpm to the configuration
+
+unique template quattor/aii/rpms/client;
+
+"/software/packages"=pkg_repl("aii-client","@VERSION@-@RELEASE@","noarch");
+

@@ -1,0 +1,81 @@
+=pod
+
+=head1 AII
+
+The Automated Installation Infrastructure (AII) is a Quattor tool
+to configure automated booting and installing of hosts via the network.
+It can be used to configure standard tools like DHCP, PXE and Kickstart for 
+network booting and installation.
+Please refer to the documentation for these tools about their
+specific configuration options.
+
+Starting with AII version 2, AII uses a plugin framework for the configuration 
+of the network boot and installation components. These plugins replace the
+NBP and Kickstart template files that were used in AII version 1. 
+See L<aii-update(@MANSECT@)> for more information about the changes in AII.
+
+=head1 Configuring the installation and network boot.
+
+Network boot and installation are configured in three steps:
+
+=over 4
+
+=item * DHCP server configuration
+
+Configures the network for the host. It is configured by C</system/aii/dhcp>
+
+=item * Network boot configuration
+
+Configures the network boot, including the kernel that must be
+downloaded for booting. It is configured by a NBP plug-in
+(component). All NBP plug-ins are registered in the Pan schema under
+C</system/aii/nbp/<plug-in-name> >
+
+=item * Network installation configuration
+
+Once the host has configured its network and has a kernel to boot up
+from, the installation procedure must be configured. This usually
+involves a Kickstart or Jumpstart file. This step is performed by a
+so-called osinstall plugin. These plug-ins are registered in the Pan 
+schema under 
+C</system/aii/osinstall/<plug-in name> >
+
+=back
+
+=head1 AII plug-ins
+
+An AII plug-in is an NCM component placed under
+/system/aii/{osinstall,nbp} . Plug-ins are shipped as separate 
+packages. By default, AII uses the C<pxelinux> and C<ks> plug-ins 
+for the configuration of PXE and Kickstart, respectively. 
+However, it is possible to develop plugins for other protocols, if 
+needed.
+
+It is possible to extend the configuration options provided by the
+osinstall plugin. This can be achieved via user-defined
+hooks. See L<aii-hooks(@MANSECT@)> for more information on writing hooks.
+
+=head1 AII variables
+
+Two variables are defined for choosing the plug-ins to be run:
+
+=over 4
+
+=item * C<AII_OSINSTALL_GEN>
+
+Defines the configuration template for the osinstall component. Defaults to @DEF_OSINSTALL_GEN@
+
+=item * C<AII_NBP_GEN>
+
+Defines the configuration template for the NBP component. Defaults to @DEF_NBP_GEN@.
+
+=head1 SEE ALSO
+
+L<aii-shellfe(@MANSECT@)>, L<aii-dhcp(@MANSECT@)>, L<aii-update(@MANSECT@)>, 
+L<aii-hooks(@MANSECT@)>
+
+=head1 AUTHORS
+
+@MAINTAINER@
+
+=cut
