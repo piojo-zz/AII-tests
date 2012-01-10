@@ -43,8 +43,8 @@ type structure_@COMP@_ksfirewall = {
 type structure_@COMP@_ks_info = {
 	"ackurl"	: type_absoluteURI
 	"auth"		: string[] = list ("enableshadow", "enablemd5")
-    "bootloader_location" : string = "mbr"
-    "bootloader_append" ? string
+	"bootloader_location" : string = "mbr"
+	"bootloader_append" ? string
 	"bootdisk_order" ? string[] # From DESYs template
 	"clearmbr"	: boolean = true
 	"clearpart"	? string []
@@ -52,6 +52,7 @@ type structure_@COMP@_ks_info = {
 	"email_success" : boolean = false
 	"firewall"	? structure_@COMP@_ksfirewall
 	"installtype"	: string
+	"installnumber" ? string
 	"lang"		: string = "en_US.UTF-8"
 	# If you use more than one languages, mark the default one with "--default=your_lang"	
 	"langsupport"	? string [] = list ("en_US.UTF-8")
@@ -76,7 +77,7 @@ type structure_@COMP@_ks_info = {
 	# Hooks for user customization are under: /system/@COMP@/hooks/{pre_install,
 	# post_install, post_reboot and install}. They
 	# are optional.
-    "packages_args" : string[] = list("--ignoremissing","--resolvedeps")
+	"packages_args" : string[] = list("--ignoremissing","--resolvedeps")
 };
 
 bind "/system/aii/osinstall/@COMP@" = structure_@COMP@_ks_info;
